@@ -1,10 +1,12 @@
 #include <iostream>
+#include <fstream>
 #include <math.h>
 #include <chrono>
 #include "sortAlgorithms.h"
 
 using std::cout;
 using std::endl;
+using namespace std;
 
 //These little functions are used by the heap-sort algorithm
 #define PARENT(i) ((i - 1) / 2)
@@ -12,6 +14,22 @@ using std::endl;
 #define RIGHT(i)  (2 * i + 2)
 
 
+
+int main(){
+    
+    
+    ofstream myfile;
+    myfile.open ("/Users/viraj/Desktop/CSCI 2720 (Data)/sortingDataStructure/sorting/random.dat");
+    for(int i = 0; i<200000; i++){
+        
+        int randomNum = (rand()%200000) + 1;
+        
+        myfile <<randomNum;
+
+    }
+    myfile.close();
+    return 0;
+}
 
 
 
@@ -127,7 +145,7 @@ void merge_sort_aux(int list[], int p, int r)
         int q=floor((p+r)/2);
         merge_sort_aux(list,p,q);
         merge_sort_aux(list,q+1,r);
-        merge(list,p,q,r);
+       // merge(list,p,q,r);
     }
     
 }

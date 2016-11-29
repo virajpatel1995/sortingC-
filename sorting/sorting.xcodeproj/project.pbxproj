@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C0A6974A1DE4A9DE000EC943 /* sortAlgorithms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0A697481DE4A9DE000EC943 /* sortAlgorithms.cpp */; };
-		C0BD54451DDA95B5002D46B6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0BD54441DDA95B5002D46B6 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,10 +23,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C013B7971DEE1E0B0006855D /* random.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = random.dat; sourceTree = "<group>"; };
 		C0A697481DE4A9DE000EC943 /* sortAlgorithms.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sortAlgorithms.cpp; sourceTree = "<group>"; };
 		C0A697491DE4A9DE000EC943 /* sortAlgorithms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sortAlgorithms.h; sourceTree = "<group>"; };
 		C0BD54411DDA95B5002D46B6 /* sorting */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sorting; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0BD54441DDA95B5002D46B6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +43,7 @@
 		C0BD54381DDA95B5002D46B6 = {
 			isa = PBXGroup;
 			children = (
+				C013B7971DEE1E0B0006855D /* random.dat */,
 				C0A697481DE4A9DE000EC943 /* sortAlgorithms.cpp */,
 				C0A697491DE4A9DE000EC943 /* sortAlgorithms.h */,
 				C0BD54431DDA95B5002D46B6 /* sorting */,
@@ -62,7 +62,6 @@
 		C0BD54431DDA95B5002D46B6 /* sorting */ = {
 			isa = PBXGroup;
 			children = (
-				C0BD54441DDA95B5002D46B6 /* main.cpp */,
 			);
 			path = sorting;
 			sourceTree = "<group>";
@@ -124,7 +123,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0BD54451DDA95B5002D46B6 /* main.cpp in Sources */,
 				C0A6974A1DE4A9DE000EC943 /* sortAlgorithms.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
