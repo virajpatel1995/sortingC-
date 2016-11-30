@@ -23,7 +23,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C013B7971DEE1E0B0006855D /* random.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = random.dat; sourceTree = "<group>"; };
+		C07898251DEF76FC00BB7917 /* inorder.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = inorder.dat; sourceTree = "<group>"; };
+		C07898261DEF77B100BB7917 /* reverse.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reverse.dat; sourceTree = "<group>"; };
+		C07898271DEF782900BB7917 /* random.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = random.dat; sourceTree = "<group>"; };
 		C0A697481DE4A9DE000EC943 /* sortAlgorithms.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sortAlgorithms.cpp; sourceTree = "<group>"; };
 		C0A697491DE4A9DE000EC943 /* sortAlgorithms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sortAlgorithms.h; sourceTree = "<group>"; };
 		C0BD54411DDA95B5002D46B6 /* sorting */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sorting; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,7 +45,9 @@
 		C0BD54381DDA95B5002D46B6 = {
 			isa = PBXGroup;
 			children = (
-				C013B7971DEE1E0B0006855D /* random.dat */,
+				C07898271DEF782900BB7917 /* random.dat */,
+				C07898251DEF76FC00BB7917 /* inorder.dat */,
+				C07898261DEF77B100BB7917 /* reverse.dat */,
 				C0A697481DE4A9DE000EC943 /* sortAlgorithms.cpp */,
 				C0A697491DE4A9DE000EC943 /* sortAlgorithms.h */,
 				C0BD54431DDA95B5002D46B6 /* sorting */,

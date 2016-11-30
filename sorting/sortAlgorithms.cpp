@@ -18,46 +18,24 @@ using namespace std;
 
 int main(){
     
+    ifstream fsnumbers;
+    fsnumbers.open ("/Users/viraj/Desktop/CSCI 2720 (Data)/sortingDataStructure/sorting/random.dat");
     
-    ofstream myfile;
-    myfile.open ("/Users/viraj/Desktop/CSCI 2720 (Data)/sortingDataStructure/sorting/random.dat");
-    for(int i = 0; i<200000; i++){
-        
-        int randomNum = (rand()%200000) + 1;
-        
-        myfile <<randomNum <<endl;
-
+    int array[10];
+    
+    int counter = 0;
+    while (counter < 10)
+    {
+        fsnumbers >> array[counter];
+        cout << &fsnumbers;
+        cout << endl;
+        counter++;
     }
-    myfile.close();
-    return 0;
-    
-    string array[200000];
-    int a = 0;
-    ifstream myf("/Users/viraj/Desktop/CSCI 2720 (Data)/sortingDataStructure/sorting/random.dat");
-    getline(myf, array[a]);
-    cout<<array[a] <<"\n";
-    
-    
-    
-    
-    
-    
-    
-    
-    
         }//end of main
     
 
     
     
-    
-    
-    
-    
-    
-    
-    
-
 
 
 
