@@ -3,6 +3,7 @@
 #include <math.h>
 #include <chrono>
 #include <string>
+#include <time.h>
 #include "sortAlgorithms.h"
 
 using std::cout;
@@ -16,31 +17,11 @@ using namespace std;
 
 
 
-int main(){
-    
-    ifstream fsnumbers;
-    fsnumbers.open ("/Users/viraj/Desktop/CSCI 2720 (Data)/sortingDataStructure/sorting/random.dat");
-    
-    int array[10];
-    
-    int counter = 0;
-    while (counter < 10)
-    {
-        fsnumbers >> array[counter];
-        cout << &fsnumbers;
-        cout << endl;
-        counter++;
-    }
-        }//end of main
-    
-
-    
-    
-
-
-
-
 //selection Sort
+
+sort::sort() {
+    int count = 0;
+}
 
 void sort::selectionSort(int list[], int size)
 {
@@ -56,6 +37,10 @@ void sort::selectionSort(int list[], int size)
         tmp = list[i];
         list[i] = list[j];
         list[j] = tmp;
+    }
+    for(int k = 0; k < size; k ++)
+    {
+        cout << list[k] << " ";
     }
 }
 
@@ -79,6 +64,10 @@ void sort::bubble_sort(int list[], int size)
             }
         }
     }
+    for(int k = 0; k < size; k ++)
+    {
+        cout << list[k] << " ";
+    }
 }
 
 
@@ -98,153 +87,176 @@ void sort::insertion_sort(int list[], int size)
         list[i+1]=key;
         
     }
+    for(int k = 0; k < size; k ++)
+    {
+        cout << list[k] << " ";
+    }
+
+}
+
+void sort::merge(int array[], int min, int max, int mid)
+{
+    int firstIndex = min ;
+    int secondIndex = mid + 1 ;
+    int index = min ;
+    int tempArray[max] ;
+    
+    // if there are still objects in both arrays
+    while ((firstIndex <= mid) && (secondIndex <= max))
+    {
+        if (array[firstIndex] < array[secondIndex])
+        {
+            tempArray[index] = array[firstIndex] ;
+            index++ ;
+            firstIndex++ ;
+        }
+        else
+        {
+            tempArray[index] = array[secondIndex] ;
+            index++ ;
+            secondIndex++ ;
+        }
+    }
+    
+    
+    
+    // terminates the object of the lower array
+    while (firstIndex <= mid)
+    {
+        tempArray[index] = array[firstIndex] ;
+        index++ ;
+        firstIndex++ ;
+    }
+    
+    // terminates the object of the upper array
+    while (secondIndex <= max)
+    {
+        tempArray[index] = array[secondIndex] ;
+        index++ ;
+        secondIndex++ ;
+    }
+    
+    // transfer to the initial array
+    for (int i = min ; i < index ; i++)
+        array[i] = tempArray[i] ;
 }
 
 //Merge-sort
 
-void sort::merge(int list[], int p, int q, int r)
+void mergeSort(int array[], int min, int max)
 {
-    //n1 and n2 are the lengths of the pre-sorted sublists, list[p..q] and list[q+1..r]
-    int n1=q-p+1;
-    int n2=r-q;
-    //copy these pre-sorted lists to L and R
-    int L[n1+1];
-    int R[n2+1];
-    for(int i=0;i<n1; i++)
+    sort::sort Sorting;
+    // prerequisite
+    if (min < max)
     {
-        L[i]=list[p+i];
+        // get the middle point
+        int mid = (int)floor((max+min)/2) ;
+        
+        // apply merge sort to both parts of this
+        mergeSort(array, min, mid) ;
+        mergeSort(array, mid+1, max) ;
+        
+        // and finally merge all that sorted stuff
+        Sorting.merge(array, min, max, mid) ;
     }
-    for(int j=0;j<n2; j++)
+    for(int k = 0; k < max; k ++)
     {
-        R[j]=list[q+1+j];
+        cout << array[k] << " ";
     }
-    
-    
-    //Create a sentinal value for L and R that is larger than the largest
-    //element of list
-    int largest;
-    if(L[n1-1]<R[n2-1]) largest=R[n2-1]; else largest=L[n1-1];
-    L[n1]=largest+1;
-    R[n2]=largest+1;
-    
-    //Merge the L and R lists
-    int i=0;
-    int j=0;
-    for(int k=p; k<=r; k++)
-    {
-        if (L[i]<=R[j])
-        {
-            list[k]=L[i];
-            i++;
-        } else
-        {
-            list[k]=R[j];
-            j++;
-        }
-    }
-}
 
-void merge_sort_aux(int list[], int p, int r)
-{
-    if(p<r)
-    {
-        int q=floor((p+r)/2);
-        merge_sort_aux(list,p,q);
-        merge_sort_aux(list,q+1,r);
-       // merge(list,p,q,r);
-    }
-    
-}
-
-void merge_sort(int list[], int size)
-{
-    merge_sort_aux(list, 0, size - 1);
 }
 
 //Heap-sort................................................................
 
-class heap
-{
-public:
-    int *nodes;
-    int length;
-    int heap_size;
-};
 
-//max_heapify places the element list[index] into the subarray list[index+1...],
-//which is assumed to already be in max-heap form
-
-void max_heapify(heap list, int index)
+// returns the left node (by doubling the current node)
+int leftNode(int node)
 {
-    
-    int left,right,largest,exchange_temp;
-    
-    left = LEFT(index);
-    right = RIGHT(index);
-    
-    if(left <list.heap_size && list.nodes[left] > list.nodes[index])
-    {
-        largest = left;
-    } else
-    {
-        largest = index;
-    }
-    
-    if(right <list.heap_size && list.nodes[right] > list.nodes[largest])
-    {
-        largest = right;
-    }
-    
-    
-    if(largest != index)
-    {
-        exchange_temp = list.nodes[index];
-        list.nodes[index] = list.nodes[largest];
-        list.nodes[largest] = exchange_temp;
-        max_heapify(list, largest);
-    }
-    
+    return node << 1 ;	// this actually does 2*node
 }
 
-//build_max_heap turns an array into max-heap form by repeatedly calling
-//max_heapify
-
-void build_max_heap(heap list)
+// returns the right node (by doubline the current node and adding 1)
+int rightNode(int node)
 {
-    list.heap_size = list.length;
-    for(int i = floor(list.length/2); i>=0; i--)
-    {
-        max_heapify(list, i);
-    }
+    return (node << 1) + 1 ;	// this actually does 2*node+1
 }
 
-//Since one property of a max-heap is that the first element is the largest,
-//heap_sort swaps this element with the last element, then re-heapifies the
-//rest, recursively until the whole array is sorted
-
-void heap_sort(int list[], int size)
+// return the parent node (by taking the half of the
+// current node and returning its floor)
+int parentNode(int node)
 {
-    int exchange_temp;
-    heap tempheap;
-    tempheap.length = size;
-    tempheap.nodes = list;
-    tempheap.heap_size = size;
-    build_max_heap(tempheap);
+    return (int)floor(node/2) ;
+}
+
+// restore the heap property
+void maxHeapify(int array[], int i, int heapSize)
+{
+    // get the two children nodes
+    int left = leftNode(i) ;
+    int right = rightNode(i) ;
     
+    // assume that the largest is originally the current node
+    int largest = i ;
     
-    for(int i= tempheap.length - 1; i>=1; i--)
+    // check if the left node is the largest
+    if (left <= heapSize && array[left] > array[i])
+        largest = left ;
+    
+    // check if the right node is the largest
+    if (right <= heapSize && array[right] > array[largest])
+        largest = right ;
+    
+    // in case the left or right node was larger than the parent
+    if (largest != i)
     {
-        exchange_temp = tempheap.nodes[0];
-        tempheap.nodes[0] = tempheap.nodes[i];
-        tempheap.nodes[i] = exchange_temp;
-        tempheap.heap_size = tempheap.heap_size - 1;
+        // we switch the parent with the largest child
+        int temp = array[i] ;
+        array[i] = array[largest] ;
+        array[largest] = temp ;
         
-        max_heapify(tempheap,0);
+        // and apply maxHeapify recursively to the subtree
+        maxHeapify(array, largest, heapSize) ;
     }
-    
 }
 
-//Quicksort
+// build the heap by looping through the array
+void buildMaxHeap(int array[], int heapSize)
+{
+    for (int i = (int)floor(heapSize/2) ; i >= 0 ; i--)
+        maxHeapify(array, i, heapSize) ;
+}
+
+void sort::heapSort(int array[], int arraySize)
+{
+    // determine the heap size
+    int heapSize = arraySize ;
+    
+    // build the heap
+    buildMaxHeap(array, heapSize) ;
+    
+    // loop through the heap
+    for (int i = heapSize ; i > 0 ; i--)
+    {
+        // swap the root of the heap with the last element of the heap
+        int temp = array[0] ;
+        array[0] = array[i] ;
+        array[i] = temp ;
+        
+        // decrease the size of the heap by one so that the previous
+        // max value will stay in its proper placement
+        heapSize-- ;
+        
+        // put the heap back in max-heap order
+        maxHeapify(array, 0, heapSize) ;
+    }
+    for(int k = 0; k < arraySize; k ++)
+    {
+        cout << array[k] << " ";
+    }
+
+}
+
+//Quicksort...............
 
 int partition(int list[], int p, int r)
 {
@@ -281,5 +293,97 @@ void quicksort_aux(int list[], int p, int r)
 void sort::quick_sort(int list[], int size)
 {
     quicksort_aux(list,0, size-1);
+    for(int k = 0; k < size; k ++)
+    {
+        cout << list[k] << " ";
+    }
 }
 
+
+
+int main(){
+    
+    ifstream randomFile("/Users/viraj/Desktop/CSCI 2720 (Data)/sortingDataStructure/sorting/random.dat");
+    ifstream inorderFile("/Users/viraj/Desktop/CSCI 2720 (Data)/sortingDataStructure/sorting/inorder.dat");
+    ifstream reverseFile("/Users/viraj/Desktop/CSCI 2720 (Data)/sortingDataStructure/sorting/reverse.dat");
+    sort::sort Sorter;
+    
+    if(randomFile.is_open()) {
+        
+        int array [] = {10, 100, 1000, 10000, 20000, 100000, 200000};
+        
+        int numbers[3][200000];
+        
+        //Store numbers from file to array.
+        for(int j = 0; j < 200000; j++) {
+            randomFile >> numbers[0][j];
+            inorderFile >> numbers[1][j];
+            reverseFile >> numbers[2][j];
+        }
+        
+        //six algorithms
+        for(int i = 0; i < 6; i++) {
+            
+            //different files
+            for(int files = 0; files < 3; files++) {
+                
+                cout << "Moving to Output File " << files+1 << endl;
+                
+                //different size
+                for(int size = 0; size < (sizeof(array)/sizeof(*array)); size++) {
+                    
+                    
+                    
+                    //selection
+                    if(i == 0) {
+                        cout << "SELECTION SORT -- " << array[size] << endl;
+                        Sorter.selectionSort(numbers[files], array[size]);
+                        cout << endl;
+                    }
+                    
+                    if(i == 1) {
+                        cout << "BUBBLE SORT -- " << array[size] << endl;
+                        Sorter.bubble_sort(numbers[files], array[size]);
+                        cout << endl;
+                    }
+                    
+                    if(i == 2) {
+                        cout << "INSERTION SORT -- " << array[size] << endl;
+                        Sorter.insertion_sort(numbers[files], array[size]);
+                        cout << endl;
+                    }
+                    
+                    if(i == 3) {
+                        cout << "MERGE SORT -- " << array[size] << endl;
+                        Sorter.merge(numbers[files], 0, array[size]-1, ((array[size]-1)/2));
+                        cout << endl;
+                    }
+                    
+                    if(i == 4) {
+                        cout << "QUICK SORT -- " << array[size] << endl;
+                        Sorter.quick_sort(numbers[files], array[size]);
+                        cout << endl;
+                    }
+                    
+                    if(i == 5) {
+                        cout << "HEAP SORT -- " << array[size] << endl;
+                        Sorter.heapSort(numbers[files], array[size]);
+                        cout << endl;
+                    }
+                }
+            }
+        }
+    }
+    
+    //    int array[10];
+    //
+    //    int counter = 0;
+    //    while (counter < 10)
+    //    {
+    //        fsnumbers >> array[counter];
+    //        cout << &fsnumbers;
+    //        cout << endl;
+    //        counter++;
+    //    }
+    //        }//end of main
+}

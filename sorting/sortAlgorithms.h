@@ -6,15 +6,17 @@
 //  Copyright © 2016 Viraj Patel. All rights reserved.
 //
 
+#include <stdio.h>
+
 #ifndef sortAlgorithms_h
 #define sortAlgorithms_h
-
-#include <stdio.h>
 
 
 class sort{
     
 public:
+    
+    sort();
 
     void selectionSort(int list[], int size);
     
@@ -22,21 +24,14 @@ public:
     
     void insertion_sort(int list[], int size);
     
-    void merge(int list[], int p, int q, int r);
+    void merge(int array[], int min, int max, int mid);
     
     void quick_sort(int list[], int size);
-
-
+    void heapSort(int array[], int arraySize);
     
 };
 
 
 
+#endif
 
-
-
-
-
-
-
-#endif /* sortAlgorithms_hpp */
