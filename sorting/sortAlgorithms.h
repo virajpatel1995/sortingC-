@@ -15,8 +15,6 @@
 class sort{
     
 public:
-    
-    sort();
 
     void selectionSort(int list[], int size);
     
@@ -26,7 +24,8 @@ public:
     
     void merge(int array[], int min, int max, int mid);
     
-    void quick_sort(int list[], int size);
+    void quickSort(int array[], int min, int max);
+
     void heapSort(int array[], int arraySize);
     
 };

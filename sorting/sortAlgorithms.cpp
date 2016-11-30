@@ -3,7 +3,7 @@
 #include <math.h>
 #include <chrono>
 #include <string>
-#include <time.h>
+#include <ctime>
 #include "sortAlgorithms.h"
 
 using std::cout;
@@ -19,28 +19,32 @@ using namespace std;
 
 //selection Sort
 
-sort::sort() {
-    int count = 0;
-}
-
 void sort::selectionSort(int list[], int size)
 {
+    int temp[size];
+    for(int n = 0;n < size; n++)
+    {
+        temp[n] = list [n];
+    }
+    int start = clock();
     int j = 0;
     int tmp = 0;
     for(int i=0;i<size;i++){
         j = i;
         for(int k = i;k<size;k++){
-            if(list[j]>list[k]){
+            if(temp[j]>temp[k]){
                 j = k;
             }
         }
-        tmp = list[i];
-        list[i] = list[j];
-        list[j] = tmp;
+        tmp = temp[i];
+        temp[i] = temp[j];
+        temp[j] = tmp;
     }
+    int stop = clock();
+    cout << "Selection Sort Took: " << (stop-start)/double(CLOCKS_PER_SEC)*1000 << "ms for Size of " << size << endl;
     for(int k = 0; k < size; k ++)
     {
-        cout << list[k] << " ";
+        cout << temp[k] << " ";
     }
 }
 
@@ -51,22 +55,30 @@ void sort::selectionSort(int list[], int size)
 
 void sort::bubble_sort(int list[], int size)
 {
+    int temp2[size];
+    for(int n = 0;n < size; n++)
+    {
+        temp2[n] = list [n];
+    }
+    int start = clock();
     int temp;
     for(int i=0; i<size; i++)
     {
         for(int j=size-1; j>i; j--)
         {
-            if(list[j]<list[j-1])
+            if(temp2[j]<temp2[j-1])
             {
-                temp=list[j-1];
-                list[j-1]=list[j];
-                list[j]=temp;
+                temp=temp2[j-1];
+                temp2[j-1]=temp2[j];
+                temp2[j]=temp;
             }
         }
     }
+    int stop = clock();
+    cout << "Bubble Sort Took: " << (stop-start)/double(CLOCKS_PER_SEC)*1000 << "ms for Size of " << size << endl;
     for(int k = 0; k < size; k ++)
     {
-        cout << list[k] << " ";
+        cout << temp2[k] << " ";
     }
 }
 
@@ -75,27 +87,40 @@ void sort::bubble_sort(int list[], int size)
 
 void sort::insertion_sort(int list[], int size)
 {
+    int temp[size];
+    for(int n = 0;n < size; n++)
+    {
+        temp[n] = list [n];
+    }
+    int start = clock();
     for(int j=1;j<size;j++)
     {
-        int key=list[j];
+        int key=temp[j];
         int i = j-1;
-        while(i>-1 and list[i]>key)
+        while(i>-1 and temp[i]>key)
         {
-            list[i+1]=list[i];
+            temp[i+1]=temp[i];
             i=i-1;
         }
-        list[i+1]=key;
-        
+        temp[i+1]=key;
     }
+    int stop = clock();
+    cout << "Insertion Sort Took: " << (stop-start)/double(CLOCKS_PER_SEC)*1000 << "ms for Size of " << size << endl;
     for(int k = 0; k < size; k ++)
     {
-        cout << list[k] << " ";
+        cout << temp[k] << " ";
     }
 
 }
 
 void sort::merge(int array[], int min, int max, int mid)
 {
+    int temp[max+1];
+    for(int n = 0;n < max+1; n++)
+    {
+        temp[n] = array[n];
+    }
+    int start = clock();
     int firstIndex = min ;
     int secondIndex = mid + 1 ;
     int index = min ;
@@ -104,15 +129,15 @@ void sort::merge(int array[], int min, int max, int mid)
     // if there are still objects in both arrays
     while ((firstIndex <= mid) && (secondIndex <= max))
     {
-        if (array[firstIndex] < array[secondIndex])
+        if (temp[firstIndex] < temp[secondIndex])
         {
-            tempArray[index] = array[firstIndex] ;
+            tempArray[index] = temp[firstIndex] ;
             index++ ;
             firstIndex++ ;
         }
         else
         {
-            tempArray[index] = array[secondIndex] ;
+            tempArray[index] = temp[secondIndex] ;
             index++ ;
             secondIndex++ ;
         }
@@ -123,7 +148,7 @@ void sort::merge(int array[], int min, int max, int mid)
     // terminates the object of the lower array
     while (firstIndex <= mid)
     {
-        tempArray[index] = array[firstIndex] ;
+        tempArray[index] = temp[firstIndex] ;
         index++ ;
         firstIndex++ ;
     }
@@ -131,14 +156,23 @@ void sort::merge(int array[], int min, int max, int mid)
     // terminates the object of the upper array
     while (secondIndex <= max)
     {
-        tempArray[index] = array[secondIndex] ;
+        tempArray[index] = temp[secondIndex] ;
         index++ ;
         secondIndex++ ;
     }
     
     // transfer to the initial array
-    for (int i = min ; i < index ; i++)
-        array[i] = tempArray[i] ;
+    for (int i = min ; i < index ; i++) {
+        temp[i] = tempArray[i] ;
+    }
+    int stop = clock();
+    cout << "Merge Sort Took: " << (stop-start)/double(CLOCKS_PER_SEC)*1000 << "ms for Size of " << max+1 << endl;
+    
+    for(int k = 0; k < max+1; k ++)
+    {
+        cout << temp[k] << " ";
+    }
+
 }
 
 //Merge-sort
@@ -159,11 +193,6 @@ void mergeSort(int array[], int min, int max)
         // and finally merge all that sorted stuff
         Sorting.merge(array, min, max, mid) ;
     }
-    for(int k = 0; k < max; k ++)
-    {
-        cout << array[k] << " ";
-    }
-
 }
 
 //Heap-sort................................................................
@@ -228,78 +257,92 @@ void buildMaxHeap(int array[], int heapSize)
 
 void sort::heapSort(int array[], int arraySize)
 {
+    int temp2[arraySize];
+    for(int n = 0;n < arraySize; n++)
+    {
+        temp2[n] = array[n];
+    }
+    int start = clock();
     // determine the heap size
     int heapSize = arraySize ;
     
     // build the heap
-    buildMaxHeap(array, heapSize) ;
+    buildMaxHeap(temp2, heapSize) ;
     
     // loop through the heap
     for (int i = heapSize ; i > 0 ; i--)
     {
         // swap the root of the heap with the last element of the heap
-        int temp = array[0] ;
-        array[0] = array[i] ;
-        array[i] = temp ;
+        int temp = temp2[0] ;
+        temp2[0] = temp2[i] ;
+        temp2[i] = temp ;
         
         // decrease the size of the heap by one so that the previous
         // max value will stay in its proper placement
         heapSize-- ;
         
         // put the heap back in max-heap order
-        maxHeapify(array, 0, heapSize) ;
+        maxHeapify(temp2, 0, heapSize) ;
     }
+    int stop = clock();
+    cout << "Heap Sort Took: " << (stop-start)/double(CLOCKS_PER_SEC)*1000<< "ms for Size of " << arraySize << endl;
+    
     for(int k = 0; k < arraySize; k ++)
     {
-        cout << array[k] << " ";
+        cout << temp2[k] << " ";
     }
 
 }
 
 //Quicksort...............
 
-int partition(int list[], int p, int r)
+int partition(int array[], int min, int max)
 {
-    int pivot, index, exchange_temp;
-    pivot = list[r];
-    index = p - 1;
-    for(int i = p; i < r; i++)
+    // define a pivot as the max item of the (sub)array
+    int pivot = array[max] ;
+    int i = min - 1 ;
+    // loop through the elements of the (sub)array
+    for (int j = min ; j < max ; j++)
     {
-        if(list[i] <= pivot)
+        // in case the element has a smaller value that the pivot
+        // bring it in front of it (larger elements will come after it)
+        if (array[j] <= pivot)
         {
-            index++;
-            exchange_temp = list[i];
-            list[i] = list[index];
-            list[index] = exchange_temp;
+            i++ ;
+            int temp = array[i] ;
+            array[i] = array[j] ;
+            array[j] = temp ;
         }
     }
-    exchange_temp = list[r];
-    list[r] = list[index+1];
-    list[index+1] = exchange_temp;
-    return index+1;
+    // bring the pivot to its correct position
+    int temp = array[i+1] ;
+    array[i+1] = array[max] ;
+    array[max] = temp ;
+    
+    return i+1 ;
 }
 
-void quicksort_aux(int list[], int p, int r)
+void sort::quickSort(int array[], int min, int max)
 {
-    int q;
-    if(p<r)
+    int temp[max+1];
+    for(int n = 0;n < max+1; n++)
     {
-        q = partition(list, p, r);
-        quicksort_aux(list, p, q-1);
-        quicksort_aux(list, q+1, r);
+        temp[n] = array[n];
+    }
+    if (min < max)
+    {
+        // partition the array in two parts
+        int q = partition(temp, min, max) ;
+        // apply QuickSort recursively to both parts
+        quickSort(temp, min, q-1) ;
+        quickSort(temp, q+1, max) ;
+    }
+    for(int k = 0; k < max+1; k ++)
+    {
+        cout << temp[k] << " ";
     }
 }
-
-void sort::quick_sort(int list[], int size)
-{
-    quicksort_aux(list,0, size-1);
-    for(int k = 0; k < size; k ++)
-    {
-        cout << list[k] << " ";
-    }
-}
-
-
+//..........................
 
 int main(){
     
@@ -332,8 +375,6 @@ int main(){
                 //different size
                 for(int size = 0; size < (sizeof(array)/sizeof(*array)); size++) {
                     
-                    
-                    
                     //selection
                     if(i == 0) {
                         cout << "SELECTION SORT -- " << array[size] << endl;
@@ -361,7 +402,11 @@ int main(){
                     
                     if(i == 4) {
                         cout << "QUICK SORT -- " << array[size] << endl;
-                        Sorter.quick_sort(numbers[files], array[size]);
+                        int start = clock();
+                        Sorter.quickSort(numbers[files], 0, array[size]-1);
+                        int stop = clock();
+                        cout << "Quick Sort Took: " << (stop-start)/double(CLOCKS_PER_SEC)*1000 << "ms for Size of " << array[size] << endl;
+
                         cout << endl;
                     }
                     
