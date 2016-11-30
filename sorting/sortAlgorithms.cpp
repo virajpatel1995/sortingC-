@@ -2,6 +2,7 @@
 #include <fstream>
 #include <math.h>
 #include <chrono>
+#include <string>
 #include "sortAlgorithms.h"
 
 using std::cout;
@@ -24,12 +25,39 @@ int main(){
         
         int randomNum = (rand()%200000) + 1;
         
-        myfile <<randomNum;
+        myfile <<randomNum <<endl;
 
     }
     myfile.close();
     return 0;
-}
+    
+    string array[200000];
+    int a = 0;
+    ifstream myf("/Users/viraj/Desktop/CSCI 2720 (Data)/sortingDataStructure/sorting/random.dat");
+    getline(myf, array[a]);
+    cout<<array[a] <<"\n";
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        }//end of main
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 
 
 
