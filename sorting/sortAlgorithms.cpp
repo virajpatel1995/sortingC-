@@ -179,7 +179,7 @@ void sort::merge(int array[], int min, int max, int mid)
 
 void mergeSort(int array[], int min, int max)
 {
-    sort::sort Sorting;
+   sort::sort Sorting;
     // prerequisite
     if (min < max)
     {
@@ -420,15 +420,4 @@ int main(){
         }
     }
     
-    //    int array[10];
-    //
-    //    int counter = 0;
-    //    while (counter < 10)
-    //    {
-    //        fsnumbers >> array[counter];
-    //        cout << &fsnumbers;
-    //        cout << endl;
-    //        counter++;
-    //    }
-    //        }//end of main
 }
